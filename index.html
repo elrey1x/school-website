@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boston Intenational School</title>
+  <style>
+    :root {
+      --primary: #3B82F6;
+      --light: #f9fafb;
+      --dark: #111827;
+      --gray: #6B7280;
+      --bg: #f3f4f6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .menu {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .menu a:hover {
+      color: var(--primary);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to right, #bfdbfe, #e0f2fe);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: var(--gray);
+    }
+
+    .hero button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .hero button:hover {
+      background: #2563eb;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .section-title::after {
+      content: '';
+      width: 60px;
+      height: 3px;
+      background: var(--primary);
+      display: block;
+      margin: 0.5rem auto 2rem;
+    }
+
+    /* About Section */
+    .about {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .about img {
+      width: 100%;
+      height: 70%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .about,
+      .programs,
+      .gallery {
+        grid-template-columns: 1fr;
+        cursor: pointer;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        right: 0;
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+
+      .menu.show {
+        display: flex;
+      }
+    }
+
+    /* Programs Section */
+    .programs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .program-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .program-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .program-card h3 {
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* Contact Section */
+    .contact-form {
+      max-width: 500px;
+      margin: auto;
+      background: rgb(218, 215, 217);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .contact-form form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .contact-form button {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background: #2563eb;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .program-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.program-card h3 {
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <div class="logo">Boston International School</div>
+      <button class="mobile-menu-btn" id="menuBtn">&#9776;</button>
+      <div class="menu" id="menu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#projects">Projects</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <h1>Welcome to Boston International School</h1>
+    <p>Empowering young minds through excellence in education.</p>
+    <button onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })">Learn More</button>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2 class="section-title">About Our School</h2>
+    <div class="about">
+      <div>
+        <p>
+          Boston International School is committed to providing a nurturing environment where students thrive academically, socially, and emotionally.
+        </p>
+        <p style="margin-top: 1rem;">
+          Established in 2020, we have grown into a leading educational institution offering quality learning from early childhood through high school.
+        </p>
+        <p style="margin-top: 1rem;">
+          We believe in holistic development, innovation, and preparing our students for success in the modern world.
+        </p>
+      </div>
+      <img src="boston.jpg" alt="School Building">
+    </div>
+  </section>
+
+  <!-- Education Programs -->
+  <section id="programs">
+    <h2 class="section-title">Education Programs</h2>
+    <div class="programs">
+      <div class="program-card">
+        <h3>Early Childhood Education</h3>
+        <p>Fostering creativity and foundational skills in a playful and safe environment.</p>
+      </div>
+      <div class="program-card">
+        <h3>Primary & Middle School</h3>
+        <p>Strong academic foundation with emphasis on reading, writing, math, science, and social studies.</p>
+      </div>
+      <div class="program-card">
+        <h3>High School Program</h3>
+        <p>College preparatory curriculum with STEM, arts, humanities, and advanced placement courses.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Student Projects -->
+  <section id="projects">
+    <h2 class="section-title">Student Projects</h2>
+    <div class="programs">
+      <div class="program-card">
+        <h3>Science Fair Winners</h3>
+        <p>Our students regularly win regional and national science fairs with innovative projects.</p>
+      </div>
+      <div class="program-card">
+        <h3>Robotics Club</h3>
+        <p>We have an award-winning robotics team that competes nationwide.</p>
+      </div>
+      <div class="program-card">
+        <h3>Art Exhibitions</h3>
+        <p>Annual student art show displays creative works from all grade levels.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <h2 class="section-title">School Gallery</h2>
+    <div class="gallery">
+      <img src="IMG_0612.JPG" alt="Classroom 1">
+      <img src="IMG_0539.JPG" alt="Students 2">
+      <img src="IMG_0401.JPG" alt="Campus 3">
+      <img src="IMG_0301.JPG" alt="Library 4">
+      <img src="IMG_0412.jpg " alt="Sports 5">
+      <img src="IMG_0747.JPG" alt="Cultural Day">
+      <img src="IMG_0883.jpg" alt="Cultural Day">
+      <img src="IMG_0775.JPG" alt="Cultural Day">
+    </div>
+  </section>
+
+  <!-- News & Events -->
+<section id="news">
+  <h2 class="section-title">Latest News & Events</h2>
+  <div class="programs">
+    <div class="program-card">
+      <img src="IMG_0303.jpg" alt="Science Fair" style="width:100%; border-radius: 8px; margin-bottom: 1rem;">
+      <h3>Annual Science Fair</h3>
+      <p>Join us on March 15th for our annual science fair showcasing student innovations.</p>
+    </div>
+    <div class="program-card">
+      <img src="https://placehold.co/600x300?text=Sports+Day+2025" alt="Sports Day" style="width:100%; border-radius: 8px; margin-bottom: 1rem;">
+      <h3>Sports Day Celebration</h3>
+      <p>Celebrate sportsmanship and teamwork at our inter-house competition on April 5th.</p>
+    </div>
+    <div class="program-card">
+      <img src="IMG_0878.jpg" alt="PTM" style="width:100%; border-radius: 8px; margin-bottom: 1rem;">
+      <h3>Parent-Teacher Meetings</h3>
+      <p>Schedule your meeting with teachers on May 2nd to discuss your child's progress.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials" style="background: white; padding: 4rem 2rem;">
+  <h2 class="section-title">What Our Community Says</h2>
+  <div class="programs">
+    <div class="program-card" style="box-shadow: none; background: #f3f4f6; border-left: 5px solid var(--primary);">
+      <p style="font-style: italic;">"Boston International School has transformed my child’s learning experience. The teachers are caring and dedicated."</p>
+      <p style="margin-top: 1rem; font-weight: bold;">— Alexander Abebti, Parent</p>
+    </div>
+    <div class="program-card" style="box-shadow: none; background: #f3f4f6; border-left: 5px solid var(--primary);">
+      <p style="font-style: italic;">"I've grown so much as a student here. The extracurriculars helped me discover my passion for robotics."</p>
+      <p style="margin-top: 1rem; font-weight: bold;">— Abraham Byandala, Grade 12 Student</p>
+    </div>
+    <div class="program-card" style="box-shadow: none; background: #f3f4f6; border-left: 5px solid var(--primary);">
+      <p style="font-style: italic;">"The staff goes above and beyond to support every child. I feel confident leaving my son in their care."</p>
+      <p style="margin-top: 1rem; font-weight: bold;">— Priya Bravo, Parent</p>
+    </div>
+  </div>
+</section>
+
+  <!-- School Location -->
+<section id="location" style="padding: 4rem 2rem; background: #f9fafb;">
+  <h2 class="section-title">Find Us</h2>
+  <p style="text-align:center; max-width: 700px; margin: auto; color: var(--gray); margin-bottom: 2rem;">
+    Visit our campus or use the map below to find directions.
+  </p>
+
+  <!-- Google Map Embed -->
+  <div style="max-width: 1000px; margin: auto; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4938.861092358942!2d32.614793705267914!3d0.28501742985686185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbdccca552df1%3A0x4d40e4ff5076789f!2sBoston%20International%20School!5e0!3m2!1sen!2sug!4v1748584764209!5m2!1sen!2sug "  width="100%"  height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      width="80%" 
+      height="350" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<!-- Alumni Stories -->
+<section id="alumni" style="padding: 4rem 2rem; background: white;">
+  <h2 class="section-title">Our Alumni Success Stories</h2>
+  <p style="text-align:center; max-width: 700px; margin: auto; color: var(--gray); margin-bottom: 3rem;">
+    Our graduates are making a difference around the world — in tech, medicine, education, and more.
+  </p>
+
+  <div class="programs">
+    <!-- Story 1 -->
+    <div class="program-card" style="box-shadow: none; background: #f9fafb; border-left: 5px solid var(--primary);">
+      <h3>Jane Doe</h3>
+      <p style="color: var(--primary); font-weight: bold;">Class of 2010</p>
+      <p>Software Engineer at Google</p>
+      <p style="margin-top: 1rem; font-style: italic;">"Green Valley gave me the confidence and foundation to pursue a career in tech."</p>
+    </div>
+
+    <!-- Story 2 -->
+    <div class="program-card" style="box-shadow: none; background: #f9fafb; border-left: 5px solid var(--primary);">
+      <h3>Raj Patel</h3>
+      <p style="color: var(--primary); font-weight: bold;">Class of 2021</p>
+      <p>Pediatrician at Children’s Hospital</p>
+      <p style="margin-top: 1rem; font-style: italic;">"The values I learned here shaped who I am today. I’m proud to give back to my community."</p>
+    </div>
+
+    <!-- Story 3 -->
+    <div class="program-card" style="box-shadow: none; background: #f9fafb; border-left: 5px solid var(--primary);">
+      <h3>Emily Johnson</h3>
+      <p style="color: var(--primary); font-weight: bold;">Class of 2020</p>
+      <p>Entrepreneur & Founder of EcoTech Solutions</p>
+      <p style="margin-top: 1rem; font-style: italic;">"My journey started in the school science fair. Boston  helped me dream big."</p>
+    </div>
+    <div class="program-card" style="box-shadow: none; background: #f9fafb; border-left: 5px solid var(--primary);">
+  <img src="IMG_0777.jpg" alt="Jane Doe" style="border-radius: 60%; width: 80px; height: 80px; margin-bottom: 1rem;">
+  <h3>melati</h3>
+  <p style="color: var(--primary); font-weight: bold;">Class of 2022</p>
+  <p>Software Engineer In Kampala</p>
+  <p style="margin-top: 1rem; font-style: italic;">"boston school gave me the confidence and foundation to pursue a career in tech."</p>
+</div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+  <section id="contact">
+    <h2 class="section-title">Contact Us
+    <div class="contact-form">
+      <form>
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea rows="5" placeholder="Your Message"></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+
+<!-- Footer -->
+<footer style="background: var(--dark); color: white; text-align: center; padding: 2rem 1rem;">
+  <div class="logo" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Boston International School</div>
+  <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 1rem;">Follow us on social media for updates and events.</p>
+
+  <!-- Social Media Icons -->
+  <div style="margin-bottom: 1rem;">
+    <a href="https://facebook.com/your-school-page"  target="_blank" style="margin: 0 10px; color: white; text-decoration: none; font-size: 1.2rem;">
+      <svg fill="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; display: inline-block;">
+        <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.98C18.343 21.129 22 16.99 22 12z"/>
+      </svg>
+      <span style="display: none;">Facebook</span>
+    </a>
+    
+    <a href="https://instagram.com/your_school"  target="_blank" style="margin: 0 10px; color: white; text-decoration: none; font-size: 1.2rem;">
+      <svg fill="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; display: inline-block;">
+        <circle cx="12" cy="12" r="9.5" fill="#fff" stroke="#fff" stroke-width="2"/>
+        <circle cx="12" cy="12" r="3" fill="none" stroke="#000" stroke-width="2"/>
+        <path d="M12 5a7 7 0 100 14 7 7 0 000-14zm0 12a5 5 0 110-10 5 5 0 010 10z"/>
+        <circle cx="17" cy="7" r="1" fill="#000"/>
+      </svg>
+      <span style="display: none;">Instagram</span>
+    </a>
+    
+    <a href="https://www.instagram.com/m.e.t.h.o.d.i.a.s/?next=%2F#"  target="_blank" style="margin: 0 10px; color: white; text-decoration: none; font-size: 1.2rem;">
+      <svg fill="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; display: inline-block;">
+        <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.629 8.094 4.992 6.388 3.213 4.156c-.423.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 14-7.497 14-13.987 0-.21 0-.42-.015-.63A9.936 9.936 0 0024 4.59z"/>
+      </svg>
+      <span style="display: none;">Twitter / X</span>
+    </a>
+
+    <a href="https://youtube.com/@your_school"  target="_blank" style="margin: 0 10px; color: rgb(224, 215, 215); text-decoration: none; font-size: 1.2rem;">
+      <svg fill="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px; display: inline-block;">
+        <path d="M23.498 6.186a2.423 2.423 0 00-1.72-1.719C19.556 4 12 4 12 4s-7.556 0-9.777.467A2.423 2.423 0 00.502 6.186C0 8.402 0 12 0 12s0 3.598.502 5.814a2.423 2.423 0 001.72 1.719C4.444 20 12 20 12 20s7.556 0 9.777-.467a2.423 2.423 0 001.72-1.719C24 15.598 24 12 24 12s0-3.598-.502-5.814zM9.545 15.568V8.432L15.272 12l-5.727 3.568z"/>
+      </svg>
+      <span style="display: none;">YouTube</span>
+    </a>
+  </div>
+
+  <p style="font-size: 0.9rem; color: #aaa;">&copy; 2025 Boston International School. All rights reserved.</p>
+</footer>
+
+  
+
+  <!-- JavaScript for Mobile Menu -->
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('show');
+    });
+  </script>
+
+</body>
+</html>
